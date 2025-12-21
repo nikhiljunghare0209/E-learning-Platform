@@ -25,10 +25,15 @@ import { deleteMediaFromCloudinary, uploadMedia } from "../utils/cloudinary.js";
 export const register=async(req,res)=>{
   try{
   
- // fron below statement server access name,email,password from frontend
+ // from below statement server access name,email,password from frontend
     console.log(req.body);
 
-  
+    //  below statement also written as,
+
+    //  const name = req.body.name;
+    //  const email = req.body.email;
+    //  const password = req.body.password;
+
     const{name,email,password}=req.body;
 
     // condition for one of data from name,email,password is not present
@@ -39,7 +44,7 @@ export const register=async(req,res)=>{
         message:"All feilds are require"
       })
     }
-
+  
     // User.findOne({ email }): in this statement "User" is model which we created in "user.model.js"
     // User.findOne({ email }): This Mongoose method searches the 'users' collection for the first document where the email field matches the provided email value. If a matching document is found, it returns that document; otherwise, it returns null
 
@@ -63,7 +68,7 @@ export const register=async(req,res)=>{
   
 
     // condition when user try to enroll using allready enrolled email
-
+    // This if statement sends a JSON response from the server to the user (client) to inform them about the error.
     if(user){
       // status(400) means the server would not process the request due to something the server consider client error
       return res.status(400).json({
@@ -119,6 +124,9 @@ export const login = async (req,res) => {
 
       // condition for finding register user 
       // User.findOne({ email }): This Mongoose method searches the 'users' collection for the first document where the email field matches the provided email value. If a matching document is found, it returns that document; otherwise, it returns null
+      //below we “Find one user where the field email in the database equals the variable email.”
+      //ex.                                   { email: "nikhil@gmail.com" }
+
       const user = await User.findOne({email});
       if(!user){
           return res.status(400).json({
@@ -179,6 +187,32 @@ export const logout = async (_,res) => {
 export const getUserProfile = async (req,res) => {
   try {
       const userId = req.id;
+
+      
+// 1️⃣ User.findById(userId)
+// 👉 Database मधून userId वरून user document शोधतो
+// userId हा token verify केल्यानंतर req.id मधून मिळतो
+// म्हणजे login झालेला user
+
+// 2️⃣ .select("-password")
+// 👉 password field response मधून काढून टाकतो
+// -password म्हणजे password exclude कर
+// Security साठी खूप important
+// Backend कडून password कधीच frontend ला पाठवत नाही ❌
+
+// 3️⃣ .populate("enrolledCourses")
+// 👉 enrolledCourses मध्ये असलेले course IDs → पूर्ण course objects मध्ये convert करतो
+// Example:
+// enrolledCourses: ["courseId1", "courseId2"]
+
+// populate नंतर:
+// enrolledCourses: [
+//   { title: "React Course", price: 999 },
+//   { title: "Node Course", price: 799 }
+// ]
+// 👉 त्यामुळे frontend ला course details थेट मिळतात
+
+
       const user = await User.findById(userId).select("-password").populate("enrolledCourses");
       if(!user){
         // status 404 means the server can not find the requested resource.
@@ -202,8 +236,6 @@ export const getUserProfile = async (req,res) => {
       })
   }
 }
-
-
 
 export const updateProfile = async (req,res) => {
   try {

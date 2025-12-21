@@ -51,6 +51,13 @@ const userSchema = new mongoose.Schema(
 
 export const User = mongoose.model("User", userSchema);
 
+// MODEL ->
+// 1)A constructor function that interacts with a MongoDB collection
+// 2)explicitly defined using mongoose.model().
+// 3)used for Creating, reading, updating, and deleting documents( CRUD operations)
+// 4)function used in CRUDE OPERATION -> [.find(), .save(), .updateOne()]
+
+
 // Schema ->
 // 1)Defines the structure of documents
 
@@ -80,9 +87,3 @@ export const User = mongoose.model("User", userSchema);
 // Automatically Created
 
 //c) If a collection does not exist, MongoDB creates it automatically when a document is inserted.
-
-// MODEL ->
-// 1)A constructor function that interacts with a MongoDB collection
-// 2)explicitly defined using mongoose.model().
-// 3)used for Creating, reading, updating, and deleting documents( CRUD operations)
-// 4)function used in CRUDE OPERATION -> [.find(), .save(), .updateOne()]

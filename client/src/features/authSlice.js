@@ -6,8 +6,6 @@ const initialState={
   user:null,
   isAuthenticated:false //this will check authentication
 }
-
-
 const authSlice = createSlice({
   name: "authSlice",
   initialState,

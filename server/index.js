@@ -1,5 +1,4 @@
 //This file contain code for to create server
-
 import express from "express";
 import dotenv from "dotenv";
 import cookieParser from "cookie-parser";
@@ -23,21 +22,22 @@ connectDB();
 
 const app=express();
 
-
-
 const PORT =process.env.PORT || 3000;
 
 // below are default middleware which are require during writing backend code
 // express.json()->This middleware is essential for handling data sent in the body of POST or PUT requests as JSON.
-app.use(express.json());
-// cookieParser()->This line integrates the cookie-parser middleware into the Express application. The cookie-parser middleware parses cookies attached to the client request object, making them accessible via req.cookies.
+// “Hey, whenever JSON data comes from frontend express can not understand it . so convert it into a 'normal JavaScript object' so express can use it easily. is done by app.use(express.json());”
+app.use(express.json()); 
+// cookieParser()->This line integrates the cookie-parser middleware into the Express application. 
+// when backend sends cookies to frontend then frontend store that cookie in browser.Express cannot read them easily.so cookieParser() Converts them into a JavaScript object
+// The cookie-parser middleware parses cookies attached to the client request object, making them accessible via req.cookies.
 app.use(cookieParser());
-// CORS() ->CORS is an HTTP-header based protocol that enables servers to specify which origins are permitted to access resources on the server.
+// CORS()->CORS is an HTTP-header based protocol that enables servers to specify which origins are permitted to access resources on the server.
 // origin: "http://localhost:5173": Specifies the allowed origin for cross-origin requests. In this case, only requests originating from http://localhost:5173 are permitted to access the resources.
 app.use(cors({
   origin:"http://localhost:5173", 
   credentials:true
-}));
+}));  
 
 //fakat ya frontend URL varun alelya request lach backend data milato
 
@@ -58,6 +58,4 @@ app.use("/api/v1/progress", courseProgressRoute);
 //listen() function used to take/listen client request it take parameter as port.here, port number is 3000 
 app.listen(PORT,()=>{
   console.log(`server listen at port ${PORT}`);
-})
-
-
+}) 

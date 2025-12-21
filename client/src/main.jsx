@@ -17,7 +17,7 @@ const Custom = ({ children }) => {
 // Below we use createRoot function from 'react-dom/client' library.In this function we select element of id 'root' which is define in index.html and then render App component on UI.
 createRoot(document.getElementById("root")).render(
   // We use <StrictMode> and <Provider> to wrap our App component.
-  // <StrictMode> is used to help detect potential problems in an application. it runs additional checks and warnings in development mode.it  show warnings in console if any potential problems are found.prolems like using deprecated APIs, unexpected side effects, etc.
+  // <StrictMode> is used to help detect potential problems in an application. it runs additional checks and warnings in development mode.it  show warnings in console if any potential problems are found.prblems like using deprecated APIs, unexpected side effects, etc.
   // <Provider> is used to provide the Redux store to the React components.reduxstore is a centralized state management system for React applications. It allows you to manage the state of your application in a predictable way.
   // <Custom> is a wrapper component that shows a loading spinner while the user data is being loaded.
   // <Toaster> is used to show notifications in the application.

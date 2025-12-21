@@ -10,9 +10,10 @@ import { userLoggedIn, userLoggedOut } from "../authSlice";
 
 const USER_API = "http://localhost:8080/api/v1/user/";
 
+// createApi defines API endpoints and generates hooks. reducerPath tells Redux where to store API data, baseUrl avoids repeating the API root URL, and credentials: "include" ensures cookies are sent with requests for authentication.
+
 // fetchBaseQuery() is function present in "@reduxjs/toolkit/query/react" contain object.
 // key "baseUrl" ->it contain API end point
-// key "endpoints" has value as call back function with parameter 'builder'. we do data post and get using 'builder' parameter.
 
 // builder.mutation -> use when we want to post data on api/server
 // builder.queary -> use when we want to get data from api/server
@@ -21,7 +22,10 @@ export const authApi = createApi({
   baseQuery: fetchBaseQuery({
     baseUrl: USER_API,
     credentials: "include",
-  }),
+  }),  
+
+  // In below key "endpoints" has value as call back function with parameter 'builder'. we do data post and get using 'builder' parameter
+
   // An endpoint in backend development is a specific URL (Uniform Resource Locator) where a client (frontend or another service) can send requests to interact with the backend server or API.
 
 //   An endpoint consists of:
@@ -68,8 +72,7 @@ export const authApi = createApi({
 
 
 //   🔹 Step 1: Backend sends successful response
-// Let’s say your backend returns:
-
+// Let’s say your backend returns: token and user data upon successful login:
 
 // {
 //   "success": true,

@@ -59,7 +59,7 @@ export const ProtectedRoute = ({children}) => {
 
 // Without AuthenticatedUser,
 // Logged-in users could still type " /login " in the address bar and see the login form again, which doesn’t make sense.
-// This wrapper protects the login page so only unauthenticated users can visit it.
+// This below wrapper component protects the login page so only unauthenticated users can visit it.
 
 // Explanation of AuthenticatedUser function:
     

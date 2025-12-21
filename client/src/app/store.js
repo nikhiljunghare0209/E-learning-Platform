@@ -1,4 +1,3 @@
-
 import { configureStore } from "@reduxjs/toolkit";
 import rootRedcuer from "./rootReducer";
 import { authApi } from "@/features/api/authApi";
@@ -22,11 +21,17 @@ import { courseProgressApi } from "@/features/api/courseProgressApi";
 // It allows you to add extra functionality, like logging actions, handling asynchronous requests, or modifying actions.
 // In this case, we are adding the middleware for the APIs defined in authApi, courseApi, purchaseApi, and courseProgressApi.
 
-// 
-export const appStore=configureStore({
-  reducer:rootRedcuer,
-  middleware:(defaultMiddleware)=>defaultMiddleware().concat(authApi.middleware,courseApi.middleware,purchaseApi.middleware,courseProgressApi.middleware)  //this is default line in RTK queary.this show that defaultMiddleware() is middleware array where we add new middleware authApi.middleware
-})
+//
+export const appStore = configureStore({
+  reducer: rootRedcuer,
+  middleware: (defaultMiddleware) =>
+    defaultMiddleware().concat(
+      authApi.middleware,
+      courseApi.middleware,
+      purchaseApi.middleware,
+      courseProgressApi.middleware
+    ), //this is default line in RTK queary.this show that defaultMiddleware() is middleware array where we add new middleware authApi.middleware
+});
 
 // when user will refresh webpage then user data will be undefine.hence,below code will run every time after refreshment of webpage.therefor user data prsent in webpage.
 
@@ -35,10 +40,10 @@ export const appStore=configureStore({
 //The store is empty again (Redux state lives in memory, so it’s wiped).
 //Your initializeApp() function immediately dispatches loadUser API request.
 //The middleware fetches the user data, puts it back into the store, and the UI updates.
-const initializeApp=async()=>{
-  await appStore.dispatch(authApi.endpoints.loadUser.initiate({},{forceRefetch:true}))
-}
+const initializeApp = async () => {
+  await appStore.dispatch(
+    authApi.endpoints.loadUser.initiate({}, { forceRefetch: true })
+  );
+};
 
 initializeApp();
-
-

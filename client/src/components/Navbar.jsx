@@ -50,7 +50,10 @@ const Navbar = () => {
       <div className="max-w-7xl mx-auto hidden md:flex justify-between items-center gap-10 h-full">
         <div className="flex items-center gap-2">
           <School size={"30"} />
-          {/* The <Link> component in React Router is used for client-side navigation.<Link> prevents full-page reloads (Unlike <a href="..." which refreshes the page) */}
+          {/* The <Link> component in React Router is used for client-side navigation.
+         1)Link> prevents full-page reloads (Unlike <a href="..." which refreshes the page) 
+         2)it provide faster navigation than (<a>)anchor tag.
+          */}
           <Link to="/">
             <h1 className="hidden md:block font-extrabold text-2xl">
               E-learning
